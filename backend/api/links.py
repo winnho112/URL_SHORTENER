@@ -15,7 +15,7 @@ from fastapi import APIRouter, Depends, HTTPException, Request
 from fastapi.responses import RedirectResponse
 from pydantic import BaseModel
 
-from api.auth import get_current_user
+from .auth import get_current_user
 
 # How many times to retry on duplicate short_code
 MAX_RETRIES = 5

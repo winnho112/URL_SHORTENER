@@ -7,8 +7,8 @@ from fastapi.middleware.cors import CORSMiddleware
 # Load environment variables from backend/.env
 load_dotenv(os.path.join(os.path.dirname(__file__), "..", ".env"))
 
-from api.auth import router as auth_router  # noqa: E402
-from api.links import router as links_router  # noqa: E402
+from .auth import router as auth_router  # noqa: E402
+from .links import router as links_router  # noqa: E402
 
 # Create the FastAPI application instance
 app = FastAPI(title="URL Shortener API")

@@ -8,6 +8,7 @@ from fastapi.middleware.cors import CORSMiddleware
 load_dotenv(os.path.join(os.path.dirname(__file__), "..", ".env"))
 
 from api.auth import router as auth_router  # noqa: E402
+from api.links import router as links_router  # noqa: E402
 
 # Create the FastAPI application instance
 app = FastAPI(title="URL Shortener API")
@@ -25,8 +26,9 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Include auth routes
+# Include route modules
 app.include_router(auth_router)
+app.include_router(links_router)
 
 
 @app.get("/api/health")

@@ -9,6 +9,7 @@ import os
 
 import httpx
 from fastapi import APIRouter, HTTPException, Header
+from typing import Optional
 from pydantic import BaseModel
 
 # Supabase credentials from environment
@@ -33,13 +34,12 @@ class LoginRequest(BaseModel):
 
 # ----- Helper: verify an access token with Supabase -----
 
-def get_current_user(authorization: str) -> dict:
+def get_current_user(authorization: Optional[str] = Header(default=None)) -> dict:
     """
     Verify an access token with Supabase Auth.
     Returns the user dict on success, raises HTTPException 401 on failure.
     """
-    # Expect "Bearer <token>" header
-    if not authorization.startswith("Bearer "):
+    if not authorization or not authorization.startswith("Bearer "):
         raise HTTPException(status_code=401, detail="Invalid authorization header")
 
     token = authorization.removeprefix("Bearer ")
